@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class WorkoutViewController: UIViewController {
+class WorkoutViewController: UIViewController, UITextFieldDelegate {
     
     var workout: Workout!
     
@@ -28,12 +28,19 @@ class WorkoutViewController: UIViewController {
         exercisesArray = workout.exercise?.array as! [Exercise]
         
         // Do any additional setup after loading the view.
+        
+        let dismissKB = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        dismissKB.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(dismissKB)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        fetchExercises()
     }
+    
+    
+    
     
     
     
@@ -136,12 +143,18 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > (exercisesArray[indexPath.section].set?.array.count)!  {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
             cell.addSetButton.superview?.tag = indexPath.section
+            
             return cell
         }
         
+        let adjustedIndexPathShortcut = exercisesArray[indexPath.section].set?[indexPath.row - 1] as! Sett
+       
+       let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as! SetsTableViewCell
+//        adjustedIndexPathShortcut?.reps
+        cell.textLabel?.text = "\(adjustedIndexPathShortcut.weight)"
+        cell.repsTextField.delegate = self
+        cell.repsTextField.text = "\(adjustedIndexPathShortcut.reps)"
         
-       let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
-        cell.textLabel?.text = "TEST"
         
         
         
@@ -151,6 +164,45 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            let cell: UITableViewCell = textField.superview?.superview as! SetsTableViewCell
+            let table: UITableView = cell.superview as! UITableView
+            let textFieldIndexPath = table.indexPath(for: cell)
+    
+    
+            guard let indexPathArray = textFieldIndexPath else { return }
+    
+            if textField.text == nil {
+                textField.text = "0"
+            }
+            
+            guard let strAsInt = Int(textField.text!) else { return }
+            var value = Int32(strAsInt)
+            
+            
+            let selectedSet = (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as! Sett)
+            selectedSet.reps = value
+            
+//            print("\(selectedSet.reps)")
+//            print("\(selectedSet.uuid)")
+//            print(selectedSet as! Sett).reps)
+//            print(selectedSet as! Sett).uuid)
+            
+            addRepToSet(for: selectedSet, value: value)
+//            guard let StrAsInt = textField.text as! Int32 else { return }
+//            (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as AnyObject).reps = StrAsInt
+            
+            
+            
+//            workoutArray[indexPathArray[0]].sets[indexPathArray[1] - 1].reps = StrAsInt
+        }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
@@ -206,5 +258,19 @@ extension WorkoutViewController {
             print("error adding set")
         }
         tableView.reloadData()
+    }
+    
+    func addRepToSet(for set: Sett, value: Int32) {
+        let fetch : NSFetchRequest<Sett> = Sett.fetchRequest()
+        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
+        
+        do {
+            let result = try managedContext.fetch(fetch)
+            
+            result.first?.setValue(value, forKey: "reps")
+            try managedContext.save()
+        } catch {
+            print("Error ading reps to set")
+        }
     }
 }
