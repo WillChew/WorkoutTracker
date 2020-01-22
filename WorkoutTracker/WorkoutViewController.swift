@@ -22,28 +22,52 @@ class WorkoutViewController: UIViewController {
         super.viewDidLoad()
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            managedContext = appDelegate?.persistentContainer.viewContext
-//        exercisesArray = workout.exercise?.allObjects as! [Exercise]
+        managedContext = appDelegate?.persistentContainer.viewContext
+        print(workout.name)
+//                exercisesArray = workout.exercise?.allObjects as! [Exercise]
         exercisesArray = workout.exercise?.array as! [Exercise]
+        
         // Do any additional setup after loading the view.
     }
     
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchExercises()
     }
-    */
+    
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     @IBAction func addExerciseButtonPressed(_ sender: UIBarButtonItem) {
-        addExercise()
+        var nameTextField : UITextField?
+        let alert = UIAlertController(title: "Add exercise", message: "", preferredStyle: .alert)
+        alert.addTextField { (textfield) in
+            nameTextField = textfield
+            nameTextField?.placeholder = "Exercise name"
+        }
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (_) in
+            self.addExercise(nameTextField!.text ?? "unnamed exercise")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+        
     }
     @IBAction func addSetButtonPressed(_ sender: Any) {
+        let button = sender as! UIButton
+        guard let section = button.superview?.tag else { return }
+        var exercise = exercisesArray[section]
+        print(section)
+        addSet(to: exercise)
+        
+        
         
     }
     
@@ -57,37 +81,46 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        
+        if !exercisesArray.isEmpty {
         
         return exercisesArray[section].name
-        
+        } else {
+            return ""
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
+        if  exercisesArray.count == 0{
+            return 2
+        } else {
+        return (exercisesArray[section].set?.array.count)! + 2
+//        guard let count = exercisesArray[section].set.count + 2 else {
+//            return 1
+//        }
+//        return count
         
-        return exercisesArray[section].set!.count + 2
-        
-        
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        var cell = UITableViewCell()
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath)
+             cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath)
             cell.textLabel?.text = "titles"
             return cell
         }
-        
-        if indexPath.row == exercisesArray[indexPath.section].set!.count + 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
+        guard exercisesArray[indexPath.section].set != nil else { return cell }
+        if indexPath.row > (exercisesArray[indexPath.section].set?.array.count)!  {
+             cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
             return cell
         }
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
+         cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
         cell.textLabel?.text = "TEST"
         return cell
         
@@ -100,17 +133,49 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension WorkoutViewController {
     
-    func addExercise() {
+    func fetchExercises() {
+        let fetch : NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        fetch.predicate = NSPredicate(format: "uuid == %@", workout.uuid! as CVarArg)
         do {
-            let pullups = Exercise(context: managedContext)
-            pullups.name = "Pullups"
-            pullups.uuid = UUID()
+            exercisesArray = try managedContext.fetch(fetch)
+//            let results = try managedContext.fetch(fetch)
+//            for result in results {
+//                managedContext.delete(result)
+//            }
+//            try managedContext.save()
+        } catch {
+            print("Error fetching info")
+        }
+    }
+    
+    func addExercise(_ name: String) {
+        do {
+            let exercise = Exercise(context: managedContext)
+            exercise.name = name
+            exercise.uuid = UUID()
             
-            workout.addToExercise(pullups)
+            workout.addToExercise(exercise)
+            exercisesArray = workout.exercise?.array as! [Exercise]
             try managedContext.save()
             
         } catch {
             print("error adding exercise : \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    
+    func addSet(to exercise: Exercise) {
+        
+        do {
+            let set = Sett(context: managedContext)
+            set.uuid = UUID()
+            set.reps = 5
+            set.weight = 100.0
+            exercise.addToSet(set)
+            try managedContext.save()
+        } catch {
+            print("error adding set")
         }
         tableView.reloadData()
     }
