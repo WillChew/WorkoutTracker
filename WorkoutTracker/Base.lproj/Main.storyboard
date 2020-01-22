@@ -84,7 +84,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonCell" id="VRS-kX-SSX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ButtonCell" id="VRS-kX-SSX" customClass="ButtonTableViewCell" customModule="WorkoutTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="115" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VRS-kX-SSX" id="Szl-K1-dEz">
@@ -102,6 +102,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="addSetButton" destination="MkN-J0-lvI" id="eab-wZ-RQk"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

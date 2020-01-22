@@ -23,8 +23,8 @@ class WorkoutViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         managedContext = appDelegate?.persistentContainer.viewContext
-        print(workout.name)
-//                exercisesArray = workout.exercise?.allObjects as! [Exercise]
+        
+        //                exercisesArray = workout.exercise?.allObjects as! [Exercise]
         exercisesArray = workout.exercise?.array as! [Exercise]
         
         // Do any additional setup after loading the view.
@@ -63,7 +63,8 @@ class WorkoutViewController: UIViewController {
     @IBAction func addSetButtonPressed(_ sender: Any) {
         let button = sender as! UIButton
         guard let section = button.superview?.tag else { return }
-        var exercise = exercisesArray[section]
+//        print(exercisesArray[section])
+        let exercise = exercisesArray[section]
         print(section)
         addSet(to: exercise)
         
@@ -76,52 +77,57 @@ class WorkoutViewController: UIViewController {
 extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        print(workout.exercise!.count)
         return workout.exercise!.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        if !exercisesArray.isEmpty {
         
-        return exercisesArray[section].name
-        } else {
-            return ""
-        }
+            
+            return exercisesArray[section].name
+       
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-        if  exercisesArray.count == 0{
+        if exercisesArray.count == 0 {
             return 2
         } else {
-        return (exercisesArray[section].set?.array.count)! + 2
-//        guard let count = exercisesArray[section].set.count + 2 else {
-//            return 1
-//        }
-//        return count
-        
+            return (exercisesArray[section].set?.array.count)! + 2
+           
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        
         
         if indexPath.row == 0 {
-             cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath)
             cell.textLabel?.text = "titles"
             return cell
         }
-        guard exercisesArray[indexPath.section].set != nil else { return cell }
+        
+//        if indexPath.row == 1  {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
+//            cell.addSetButton.superview?.tag = indexPath.section
+//            return cell
+//        }
+        
         if indexPath.row > (exercisesArray[indexPath.section].set?.array.count)!  {
-             cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
+            cell.addSetButton.superview?.tag = indexPath.section
             return cell
         }
         
         
-         cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
+       let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
         cell.textLabel?.text = "TEST"
+        
+        
+        
         return cell
         
     }
@@ -135,14 +141,19 @@ extension WorkoutViewController {
     
     func fetchExercises() {
         let fetch : NSFetchRequest<Exercise> = Exercise.fetchRequest()
-        fetch.predicate = NSPredicate(format: "uuid == %@", workout.uuid! as CVarArg)
+//        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
         do {
-            exercisesArray = try managedContext.fetch(fetch)
-//            let results = try managedContext.fetch(fetch)
-//            for result in results {
-//                managedContext.delete(result)
-//            }
-//            try managedContext.save()
+//            exercisesArray = try managedContext.fetch(fetch)
+            let results = try managedContext.fetch(fetch)
+
+//            exercisesArray = workout.exercise?.array as! [Exercise]
+            
+            
+            //            let results = try managedContext.fetch(fetch)
+            //            for result in results {
+            //                managedContext.delete(result)
+            //            }
+                        try managedContext.save()
         } catch {
             print("Error fetching info")
         }
