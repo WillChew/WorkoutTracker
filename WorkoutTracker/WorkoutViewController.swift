@@ -32,7 +32,7 @@ class WorkoutViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchExercises()
+//        fetchExercises()
     }
     
     
@@ -63,9 +63,9 @@ class WorkoutViewController: UIViewController {
     @IBAction func addSetButtonPressed(_ sender: Any) {
         let button = sender as! UIButton
         guard let section = button.superview?.tag else { return }
-//        print(exercisesArray[section])
+
         let exercise = exercisesArray[section]
-        print(section)
+        
         addSet(to: exercise)
         
         
@@ -77,18 +77,35 @@ class WorkoutViewController: UIViewController {
 extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(workout.exercise!.count)
+        
         return workout.exercise!.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         
             
             return exercisesArray[section].name
        
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        40
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 10, y: 8, width: 320, height: 25)
+        myLabel.font = UIFont.systemFont(ofSize: 25)
+        
+        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+
+        let headerView = UIView()
+        headerView.addSubview(myLabel)
+
+        return headerView
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
@@ -139,25 +156,25 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension WorkoutViewController {
     
-    func fetchExercises() {
-        let fetch : NSFetchRequest<Exercise> = Exercise.fetchRequest()
-//        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
-        do {
-//            exercisesArray = try managedContext.fetch(fetch)
-            let results = try managedContext.fetch(fetch)
-
-//            exercisesArray = workout.exercise?.array as! [Exercise]
-            
-            
-            //            let results = try managedContext.fetch(fetch)
-            //            for result in results {
-            //                managedContext.delete(result)
-            //            }
-                        try managedContext.save()
-        } catch {
-            print("Error fetching info")
-        }
-    }
+//    func fetchExercises() {
+//        let fetch : NSFetchRequest<Exercise> = Exercise.fetchRequest()
+////        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
+//        do {
+////            exercisesArray = try managedContext.fetch(fetch)
+//            let results = try managedContext.fetch(fetch)
+//
+////            exercisesArray = workout.exercise?.array as! [Exercise]
+//
+//
+//            //            let results = try managedContext.fetch(fetch)
+//            //            for result in results {
+//            //                managedContext.delete(result)
+//            //            }
+//                        try managedContext.save()
+//        } catch {
+//            print("Error fetching info")
+//        }
+//    }
     
     func addExercise(_ name: String) {
         do {
