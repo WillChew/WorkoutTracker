@@ -9,23 +9,37 @@
 /* Begin PBXBuildFile section */
 		21392C9023D8347500DEDED2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392C8F23D8347500DEDED2 /* AppDelegate.swift */; };
 		21392C9223D8347500DEDED2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392C9123D8347500DEDED2 /* SceneDelegate.swift */; };
-		21392C9423D8347500DEDED2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392C9323D8347500DEDED2 /* ViewController.swift */; };
 		21392C9723D8347500DEDED2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21392C9523D8347500DEDED2 /* Main.storyboard */; };
 		21392C9A23D8347500DEDED2 /* WorkoutTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21392C9823D8347500DEDED2 /* WorkoutTracker.xcdatamodeld */; };
 		21392C9C23D8347800DEDED2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21392C9B23D8347800DEDED2 /* Assets.xcassets */; };
 		21392C9F23D8347800DEDED2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21392C9D23D8347800DEDED2 /* LaunchScreen.storyboard */; };
+		21392CBF23D8383800DEDED2 /* MainScreenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CBE23D8383800DEDED2 /* MainScreenListViewController.swift */; };
+		21392CC123D8405500DEDED2 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CC023D8405500DEDED2 /* WorkoutViewController.swift */; };
+		21392CD423D8545A00DEDED2 /* Workout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CCE23D8545A00DEDED2 /* Workout+CoreDataClass.swift */; };
+		21392CD523D8545A00DEDED2 /* Workout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CCF23D8545A00DEDED2 /* Workout+CoreDataProperties.swift */; };
+		21392CD623D8545A00DEDED2 /* Sett+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD023D8545A00DEDED2 /* Sett+CoreDataClass.swift */; };
+		21392CD723D8545A00DEDED2 /* Sett+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD123D8545A00DEDED2 /* Sett+CoreDataProperties.swift */; };
+		21392CD823D8545A00DEDED2 /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */; };
+		21392CD923D8545A00DEDED2 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		21392C8C23D8347500DEDED2 /* WorkoutTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21392C8F23D8347500DEDED2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21392C9123D8347500DEDED2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		21392C9323D8347500DEDED2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		21392C9623D8347500DEDED2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21392C9923D8347500DEDED2 /* WorkoutTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutTracker.xcdatamodel; sourceTree = "<group>"; };
 		21392C9B23D8347800DEDED2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21392C9E23D8347800DEDED2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21392CA023D8347800DEDED2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21392CBE23D8383800DEDED2 /* MainScreenListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenListViewController.swift; sourceTree = "<group>"; };
+		21392CC023D8405500DEDED2 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		21392CCE23D8545A00DEDED2 /* Workout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataClass.swift"; sourceTree = "<group>"; };
+		21392CCF23D8545A00DEDED2 /* Workout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		21392CD023D8545A00DEDED2 /* Sett+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sett+CoreDataClass.swift"; sourceTree = "<group>"; };
+		21392CD123D8545A00DEDED2 /* Sett+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sett+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataClass.swift"; sourceTree = "<group>"; };
+		21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +56,12 @@
 		21392C8323D8347500DEDED2 = {
 			isa = PBXGroup;
 			children = (
+				21392CCE23D8545A00DEDED2 /* Workout+CoreDataClass.swift */,
+				21392CCF23D8545A00DEDED2 /* Workout+CoreDataProperties.swift */,
+				21392CD023D8545A00DEDED2 /* Sett+CoreDataClass.swift */,
+				21392CD123D8545A00DEDED2 /* Sett+CoreDataProperties.swift */,
+				21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */,
+				21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */,
 				21392C8E23D8347500DEDED2 /* WorkoutTracker */,
 				21392C8D23D8347500DEDED2 /* Products */,
 			);
@@ -58,9 +78,10 @@
 		21392C8E23D8347500DEDED2 /* WorkoutTracker */ = {
 			isa = PBXGroup;
 			children = (
+				21392CBE23D8383800DEDED2 /* MainScreenListViewController.swift */,
+				21392CC023D8405500DEDED2 /* WorkoutViewController.swift */,
 				21392C8F23D8347500DEDED2 /* AppDelegate.swift */,
 				21392C9123D8347500DEDED2 /* SceneDelegate.swift */,
-				21392C9323D8347500DEDED2 /* ViewController.swift */,
 				21392C9523D8347500DEDED2 /* Main.storyboard */,
 				21392C9B23D8347800DEDED2 /* Assets.xcassets */,
 				21392C9D23D8347800DEDED2 /* LaunchScreen.storyboard */,
@@ -141,10 +162,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21392C9423D8347500DEDED2 /* ViewController.swift in Sources */,
+				21392CC123D8405500DEDED2 /* WorkoutViewController.swift in Sources */,
+				21392CD723D8545A00DEDED2 /* Sett+CoreDataProperties.swift in Sources */,
+				21392CD423D8545A00DEDED2 /* Workout+CoreDataClass.swift in Sources */,
 				21392C9023D8347500DEDED2 /* AppDelegate.swift in Sources */,
+				21392CD923D8545A00DEDED2 /* Exercise+CoreDataProperties.swift in Sources */,
+				21392CBF23D8383800DEDED2 /* MainScreenListViewController.swift in Sources */,
+				21392CD823D8545A00DEDED2 /* Exercise+CoreDataClass.swift in Sources */,
+				21392CD523D8545A00DEDED2 /* Workout+CoreDataProperties.swift in Sources */,
 				21392C9A23D8347500DEDED2 /* WorkoutTracker.xcdatamodeld in Sources */,
 				21392C9223D8347500DEDED2 /* SceneDelegate.swift in Sources */,
+				21392CD623D8545A00DEDED2 /* Sett+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
