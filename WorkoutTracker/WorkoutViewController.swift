@@ -32,6 +32,8 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
         let dismissKB = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         dismissKB.cancelsTouchesInView = false
         tableView.addGestureRecognizer(dismissKB)
+        
+        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +90,7 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
 extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         
         return workout.exercise!.count
     }
@@ -263,8 +266,8 @@ extension WorkoutViewController {
         do {
             let set = Sett(context: managedContext)
             set.uuid = UUID()
-            set.reps = 5
-            set.weight = 100.0
+            set.reps = 0
+            set.weight = 0.0
             exercise.addToSet(set)
             try managedContext.save()
         } catch {

@@ -22,6 +22,7 @@ class MainScreenListViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         managedContext = appDelegate?.persistentContainer.viewContext
 //        deleteAll()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -29,6 +30,7 @@ class MainScreenListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchWorkouts()
+        tableView.tableFooterView = UIView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,8 +50,7 @@ class MainScreenListViewController: UIViewController {
      }
      */
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-        
+    fileprivate func promptAddAlert() {
         var nameTF : UITextField?
         
         let alert = UIAlertController(title: "Add a workout", message: "", preferredStyle: .alert)
@@ -64,6 +65,11 @@ class MainScreenListViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        
+        promptAddAlert()
         
         
     }
@@ -87,7 +93,7 @@ extension MainScreenListViewController : UITableViewDataSource, UITableViewDeleg
         if !workouts.isEmpty {
             cell.textLabel?.text = workouts[indexPath.row].name
         } else {
-            cell.textLabel?.text = "HI"
+            cell.textLabel?.text = "Press here to start adding workouts"
         }
         
         return cell
@@ -98,6 +104,8 @@ extension MainScreenListViewController : UITableViewDataSource, UITableViewDeleg
         if !workouts.isEmpty {
         selectedWorkout = workouts[indexPath.row]
             performSegue(withIdentifier: "WorkoutSegue", sender: self)
+        } else {
+            promptAddAlert()
         }
     }
 }
@@ -139,6 +147,7 @@ extension MainScreenListViewController {
             for result in results {
                 managedContext.delete(result)
             }
+            try managedContext.save()
         } catch {
             print("Error deleting")
         }
