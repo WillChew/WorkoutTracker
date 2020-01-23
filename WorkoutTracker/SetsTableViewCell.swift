@@ -11,6 +11,10 @@ import UIKit
 class SetsTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var repsTextField: UITextField!
+    
+    @IBOutlet weak var weightTextField: UITextField!
+    
+    @IBOutlet weak var methodTextField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

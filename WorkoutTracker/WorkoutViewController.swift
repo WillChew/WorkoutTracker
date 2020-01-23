@@ -36,7 +36,7 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        fetchExercises()
+        //        fetchExercises()
     }
     
     
@@ -70,14 +70,18 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     @IBAction func addSetButtonPressed(_ sender: Any) {
         let button = sender as! UIButton
         guard let section = button.superview?.tag else { return }
-
+        
         let exercise = exercisesArray[section]
         
         addSet(to: exercise)
         
         
-        
     }
+    
+    @IBAction func noteButtonPressed(_ sender: Any) {
+        print("HI")
+    }
+    
     
 }
 
@@ -90,29 +94,30 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-            
-            return exercisesArray[section].name
-       
+        
+        return exercisesArray[section].name
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-
-        let myLabel = UILabel()
-        myLabel.frame = CGRect(x: 10, y: 8, width: 320, height: 25)
-        myLabel.font = UIFont.systemFont(ofSize: 25)
-        
-        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
-
-        let headerView = UIView()
-        headerView.addSubview(myLabel)
-
-        return headerView
-    }
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //
+    //
+    //        let myLabel = UILabel()
+    //        myLabel.frame = CGRect(x: 10, y: 8, width: 320, height: 25)
+    //        myLabel.font = UIFont.systemFont(ofSize: 25)
+    //
+    //        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+    //
+    //        let headerView = UIView()
+    //        headerView.addSubview(myLabel)
+    //
+    //        return headerView
+    //    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
@@ -120,7 +125,7 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
             return 2
         } else {
             return (exercisesArray[section].set?.array.count)! + 2
-           
+            
         }
     }
     
@@ -130,15 +135,15 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath)
-            cell.textLabel?.text = "titles"
+            
             return cell
         }
         
-//        if indexPath.row == 1  {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
-//            cell.addSetButton.superview?.tag = indexPath.section
-//            return cell
-//        }
+        //        if indexPath.row == 1  {
+        //            let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
+        //            cell.addSetButton.superview?.tag = indexPath.section
+        //            return cell
+        //        }
         
         if indexPath.row > (exercisesArray[indexPath.section].set?.array.count)!  {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonTableViewCell
@@ -148,11 +153,14 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
         }
         
         let adjustedIndexPathShortcut = exercisesArray[indexPath.section].set?[indexPath.row - 1] as! Sett
-       
-       let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as! SetsTableViewCell
-//        adjustedIndexPathShortcut?.reps
-        cell.textLabel?.text = "\(adjustedIndexPathShortcut.weight)"
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as! SetsTableViewCell
+        //        adjustedIndexPathShortcut?.reps
         cell.repsTextField.delegate = self
+        cell.weightTextField.delegate = self
+        
+        cell.weightTextField.text = "\(adjustedIndexPathShortcut.weight)"
+        
         cell.repsTextField.text = "\(adjustedIndexPathShortcut.reps)"
         
         
@@ -167,38 +175,43 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     
-        func textFieldDidEndEditing(_ textField: UITextField) {
-            let cell: UITableViewCell = textField.superview?.superview as! SetsTableViewCell
-            let table: UITableView = cell.superview as! UITableView
-            let textFieldIndexPath = table.indexPath(for: cell)
-    
-    
-            guard let indexPathArray = textFieldIndexPath else { return }
-    
-            if textField.text == nil {
-                textField.text = "0"
-            }
-            
-            guard let strAsInt = Int(textField.text!) else { return }
-            var value = Int32(strAsInt)
-            
-            
-            let selectedSet = (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as! Sett)
-            selectedSet.reps = value
-            
-//            print("\(selectedSet.reps)")
-//            print("\(selectedSet.uuid)")
-//            print(selectedSet as! Sett).reps)
-//            print(selectedSet as! Sett).uuid)
-            
-            addRepToSet(for: selectedSet, value: value)
-//            guard let StrAsInt = textField.text as! Int32 else { return }
-//            (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as AnyObject).reps = StrAsInt
-            
-            
-            
-//            workoutArray[indexPathArray[0]].sets[indexPathArray[1] - 1].reps = StrAsInt
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let cell: UITableViewCell = textField.superview?.superview as! SetsTableViewCell
+        let table: UITableView = cell.superview as! UITableView
+        let textFieldIndexPath = table.indexPath(for: cell)
+        
+        
+        guard let indexPathArray = textFieldIndexPath else { return }
+        let selectedSet = (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as! Sett)
+        
+        if textField.text == nil {
+            textField.text = "0"
         }
+        
+        if textField.tag == 1 {
+            
+            
+            
+            
+            let numberAsDouble = textField.text.map { Double($0) }
+            
+            guard let n = numberAsDouble, let weight = n else { return }
+            selectedSet.weight = weight
+            changeWeights(for: selectedSet, value: weight)
+            
+        }
+        if textField.tag == 2{
+        guard let strAsInt = Int(textField.text!) else { return }
+        let reps = Int32(strAsInt)
+        
+        
+        
+        selectedSet.reps = reps
+        changeReps(for: selectedSet, value: reps)
+        }
+        
+        
+    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -208,25 +221,25 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension WorkoutViewController {
     
-//    func fetchExercises() {
-//        let fetch : NSFetchRequest<Exercise> = Exercise.fetchRequest()
-////        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
-//        do {
-////            exercisesArray = try managedContext.fetch(fetch)
-//            let results = try managedContext.fetch(fetch)
-//
-////            exercisesArray = workout.exercise?.array as! [Exercise]
-//
-//
-//            //            let results = try managedContext.fetch(fetch)
-//            //            for result in results {
-//            //                managedContext.delete(result)
-//            //            }
-//                        try managedContext.save()
-//        } catch {
-//            print("Error fetching info")
-//        }
-//    }
+    //    func fetchExercises() {
+    //        let fetch : NSFetchRequest<Exercise> = Exercise.fetchRequest()
+    ////        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
+    //        do {
+    ////            exercisesArray = try managedContext.fetch(fetch)
+    //            let results = try managedContext.fetch(fetch)
+    //
+    ////            exercisesArray = workout.exercise?.array as! [Exercise]
+    //
+    //
+    //            //            let results = try managedContext.fetch(fetch)
+    //            //            for result in results {
+    //            //                managedContext.delete(result)
+    //            //            }
+    //                        try managedContext.save()
+    //        } catch {
+    //            print("Error fetching info")
+    //        }
+    //    }
     
     func addExercise(_ name: String) {
         do {
@@ -260,7 +273,7 @@ extension WorkoutViewController {
         tableView.reloadData()
     }
     
-    func addRepToSet(for set: Sett, value: Int32) {
+    func changeReps(for set: Sett, value: Int32) {
         let fetch : NSFetchRequest<Sett> = Sett.fetchRequest()
         fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
         
@@ -273,4 +286,19 @@ extension WorkoutViewController {
             print("Error ading reps to set")
         }
     }
+    
+    func changeWeights(for set: Sett, value: Double) {
+        let fetch : NSFetchRequest<Sett> = Sett.fetchRequest()
+        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", workout.uuid! as CVarArg)
+        
+        do {
+            let result = try managedContext.fetch(fetch)
+            
+            result.first?.setValue(value, forKey: "weight")
+            try managedContext.save()
+        } catch {
+            print("Error ading reps to set")
+        }
+    }
+    
 }
