@@ -38,7 +38,7 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        fetchExercises()
+        title = workout.name
     }
     
     
