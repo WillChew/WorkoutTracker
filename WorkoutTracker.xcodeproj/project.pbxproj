@@ -15,14 +15,14 @@
 		21392C9F23D8347800DEDED2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21392C9D23D8347800DEDED2 /* LaunchScreen.storyboard */; };
 		21392CBF23D8383800DEDED2 /* MainScreenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CBE23D8383800DEDED2 /* MainScreenListViewController.swift */; };
 		21392CC123D8405500DEDED2 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CC023D8405500DEDED2 /* WorkoutViewController.swift */; };
-		21392CD423D8545A00DEDED2 /* Workout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CCE23D8545A00DEDED2 /* Workout+CoreDataClass.swift */; };
-		21392CD523D8545A00DEDED2 /* Workout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CCF23D8545A00DEDED2 /* Workout+CoreDataProperties.swift */; };
-		21392CD623D8545A00DEDED2 /* Sett+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD023D8545A00DEDED2 /* Sett+CoreDataClass.swift */; };
-		21392CD723D8545A00DEDED2 /* Sett+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD123D8545A00DEDED2 /* Sett+CoreDataProperties.swift */; };
-		21392CD823D8545A00DEDED2 /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */; };
-		21392CD923D8545A00DEDED2 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */; };
 		21392CDB23D8748E00DEDED2 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CDA23D8748E00DEDED2 /* ButtonTableViewCell.swift */; };
 		2179D10223E3950E00FF5977 /* TitlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D10123E3950E00FF5977 /* TitlesTableViewCell.swift */; };
+		2179D11523E42EB300FF5977 /* Sett+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D10F23E42EB300FF5977 /* Sett+CoreDataClass.swift */; };
+		2179D11623E42EB300FF5977 /* Sett+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D11023E42EB300FF5977 /* Sett+CoreDataProperties.swift */; };
+		2179D11723E42EB300FF5977 /* Workout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D11123E42EB300FF5977 /* Workout+CoreDataClass.swift */; };
+		2179D11823E42EB300FF5977 /* Workout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D11223E42EB300FF5977 /* Workout+CoreDataProperties.swift */; };
+		2179D11923E42EB300FF5977 /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D11323E42EB300FF5977 /* Exercise+CoreDataClass.swift */; };
+		2179D11A23E42EB300FF5977 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D11423E42EB300FF5977 /* Exercise+CoreDataProperties.swift */; };
 		218656DE23D9013100C6D819 /* SetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218656DD23D9013100C6D819 /* SetsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,14 +37,14 @@
 		21392CA023D8347800DEDED2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21392CBE23D8383800DEDED2 /* MainScreenListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenListViewController.swift; sourceTree = "<group>"; };
 		21392CC023D8405500DEDED2 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
-		21392CCE23D8545A00DEDED2 /* Workout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataClass.swift"; sourceTree = "<group>"; };
-		21392CCF23D8545A00DEDED2 /* Workout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		21392CD023D8545A00DEDED2 /* Sett+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sett+CoreDataClass.swift"; sourceTree = "<group>"; };
-		21392CD123D8545A00DEDED2 /* Sett+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sett+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataClass.swift"; sourceTree = "<group>"; };
-		21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		21392CDA23D8748E00DEDED2 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		2179D10123E3950E00FF5977 /* TitlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlesTableViewCell.swift; sourceTree = "<group>"; };
+		2179D10F23E42EB300FF5977 /* Sett+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sett+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2179D11023E42EB300FF5977 /* Sett+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sett+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2179D11123E42EB300FF5977 /* Workout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2179D11223E42EB300FF5977 /* Workout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2179D11323E42EB300FF5977 /* Exercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2179D11423E42EB300FF5977 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		218656DD23D9013100C6D819 /* SetsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,12 +62,12 @@
 		21392C8323D8347500DEDED2 = {
 			isa = PBXGroup;
 			children = (
-				21392CCE23D8545A00DEDED2 /* Workout+CoreDataClass.swift */,
-				21392CCF23D8545A00DEDED2 /* Workout+CoreDataProperties.swift */,
-				21392CD023D8545A00DEDED2 /* Sett+CoreDataClass.swift */,
-				21392CD123D8545A00DEDED2 /* Sett+CoreDataProperties.swift */,
-				21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */,
-				21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */,
+				2179D10F23E42EB300FF5977 /* Sett+CoreDataClass.swift */,
+				2179D11023E42EB300FF5977 /* Sett+CoreDataProperties.swift */,
+				2179D11123E42EB300FF5977 /* Workout+CoreDataClass.swift */,
+				2179D11223E42EB300FF5977 /* Workout+CoreDataProperties.swift */,
+				2179D11323E42EB300FF5977 /* Exercise+CoreDataClass.swift */,
+				2179D11423E42EB300FF5977 /* Exercise+CoreDataProperties.swift */,
 				21392C8E23D8347500DEDED2 /* WorkoutTracker */,
 				21392C8D23D8347500DEDED2 /* Products */,
 			);
@@ -174,17 +174,17 @@
 				2179D10223E3950E00FF5977 /* TitlesTableViewCell.swift in Sources */,
 				218656DE23D9013100C6D819 /* SetsTableViewCell.swift in Sources */,
 				21392CC123D8405500DEDED2 /* WorkoutViewController.swift in Sources */,
-				21392CD723D8545A00DEDED2 /* Sett+CoreDataProperties.swift in Sources */,
-				21392CD423D8545A00DEDED2 /* Workout+CoreDataClass.swift in Sources */,
 				21392CDB23D8748E00DEDED2 /* ButtonTableViewCell.swift in Sources */,
+				2179D11523E42EB300FF5977 /* Sett+CoreDataClass.swift in Sources */,
+				2179D11623E42EB300FF5977 /* Sett+CoreDataProperties.swift in Sources */,
+				2179D11823E42EB300FF5977 /* Workout+CoreDataProperties.swift in Sources */,
 				21392C9023D8347500DEDED2 /* AppDelegate.swift in Sources */,
-				21392CD923D8545A00DEDED2 /* Exercise+CoreDataProperties.swift in Sources */,
 				21392CBF23D8383800DEDED2 /* MainScreenListViewController.swift in Sources */,
-				21392CD823D8545A00DEDED2 /* Exercise+CoreDataClass.swift in Sources */,
-				21392CD523D8545A00DEDED2 /* Workout+CoreDataProperties.swift in Sources */,
+				2179D11923E42EB300FF5977 /* Exercise+CoreDataClass.swift in Sources */,
 				21392C9A23D8347500DEDED2 /* WorkoutTracker.xcdatamodeld in Sources */,
+				2179D11A23E42EB300FF5977 /* Exercise+CoreDataProperties.swift in Sources */,
 				21392C9223D8347500DEDED2 /* SceneDelegate.swift in Sources */,
-				21392CD623D8545A00DEDED2 /* Sett+CoreDataClass.swift in Sources */,
+				2179D11723E42EB300FF5977 /* Workout+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

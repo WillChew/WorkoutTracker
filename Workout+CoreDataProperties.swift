@@ -2,7 +2,7 @@
 //  Workout+CoreDataProperties.swift
 //  WorkoutTracker
 //
-//  Created by Will Chew on 2020-01-22.
+//  Created by Will Chew on 2020-01-31.
 //  Copyright © 2020 Will Chew. All rights reserved.
 //
 //
@@ -17,10 +17,11 @@ extension Workout {
         return NSFetchRequest<Workout>(entityName: "Workout")
     }
 
-    @NSManaged public var date: Date?
+    @NSManaged public var dateCompleted: Date?
     @NSManaged public var name: String?
     @NSManaged public var notes: String?
     @NSManaged public var uuid: UUID?
+    @NSManaged public var isCompleted: Bool
     @NSManaged public var exercise: NSOrderedSet?
 
 }

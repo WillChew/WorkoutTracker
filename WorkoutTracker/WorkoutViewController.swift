@@ -20,6 +20,7 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     var picker = UIPickerView()
     var methodArray = ["Normal", "RPE", "Percentage"]
     var activeTF = UITextField()
+    var exerciseUUID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +107,11 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UI
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         activeTF.text = methodArray[row]
+        changeMethod(exercise: exerciseUUID, to: methodArray[row])
+        
     }
+    
+    
     
     
     
@@ -164,7 +169,7 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UI
             picker.delegate = self
             
             cell.methodTF.inputView = picker
-            
+            cell.methodTF.text = exercisesArray[indexPath.section].type
             
             
             
@@ -199,6 +204,7 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UI
         cell.weightTextField.delegate = self
         cell.methodTextField.delegate = self
         
+        
         cell.weightTextField.text = "\(adjustedIndexPathShortcut.weight)"
         
         cell.repsTextField.text = "\(adjustedIndexPathShortcut.reps)"
@@ -220,9 +226,9 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UI
         let cell: UITableViewCell = textField.superview?.superview as! UITableViewCell
         let table: UITableView = cell.superview as! UITableView
         let textFieldIndexPath = table.indexPath(for: cell)
-        
+        guard let indexPathArray = textFieldIndexPath else { return }
         if textField.tag >= 1111 {
-            guard let indexPathArray = textFieldIndexPath else { return }
+            
             let selectedSet = (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as! Sett)
             
             if textField.text == nil {
@@ -247,7 +253,8 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UI
             }
             
             if textField.tag == 3333 {
-                print("YES")
+                print(exercisesArray[indexPathArray[0]].type)
+                
             }
         }
         
@@ -259,8 +266,21 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.tag < 1000 {
+        
+        let cell: UITableViewCell = textField.superview?.superview as! UITableViewCell
+        let table: UITableView = cell.superview as! UITableView
+        let textFieldIndexPath = table.indexPath(for: cell)
+        
+        guard let indexPathArray = textFieldIndexPath else { return }
+        let selectedExercise = exercisesArray[indexPathArray[0]]
+        
+        if textField.tag <= 1111 {
             activeTF = textField
+            
+            let uuidString = selectedExercise.uuid
+            
+            exerciseUUID = uuidString!.uuidString
+            
         }
     }
     
@@ -331,8 +351,9 @@ extension WorkoutViewController {
             result.first?.setValue(value, forKey: "reps")
             try managedContext.save()
         } catch {
-            print("Error ading reps to set")
+            print("Error adding reps to set")
         }
+        tableView.reloadData()
     }
     
     func changeWeights(for set: Sett, value: Double) {
@@ -345,8 +366,24 @@ extension WorkoutViewController {
             result.first?.setValue(value, forKey: "weight")
             try managedContext.save()
         } catch {
-            print("Error ading reps to set")
+            print("Error changing weight of set")
         }
+        tableView.reloadData()
+    }
+
+    
+    func changeMethod(exercise uuid: String, to type: String) {
+        let fetch : NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        fetch.predicate = NSPredicate(format: "%K == %@", "uuid", uuid as CVarArg)
+        
+        do {
+            let result = try managedContext.fetch(fetch)
+            result.first?.setValue(type, forKey: "type")
+            try managedContext.save()
+        } catch {
+            print("Error changing weight method")
+        }
+        tableView.reloadData()
     }
     
 }

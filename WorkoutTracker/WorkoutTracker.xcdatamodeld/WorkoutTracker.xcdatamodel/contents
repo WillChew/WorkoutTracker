@@ -3,6 +3,7 @@
     <entity name="Exercise" representedClassName="Exercise" syncable="YES">
         <attribute name="name" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="type" attributeType="String" defaultValueString="Normal"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="set" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Sett" inverseName="exercise" inverseEntity="Sett"/>
         <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="exercise" inverseEntity="Workout"/>
@@ -15,15 +16,16 @@
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="set" inverseEntity="Exercise"/>
     </entity>
     <entity name="Workout" representedClassName="Workout" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateCompleted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="exercise" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Exercise" inverseName="workout" inverseEntity="Exercise"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="-254.63671875" positionY="-330.5703125" width="128" height="118"/>
+        <element name="Exercise" positionX="-254.63671875" positionY="-330.5703125" width="128" height="133"/>
         <element name="Sett" positionX="-478.51953125" positionY="-377.359375" width="128" height="118"/>
-        <element name="Workout" positionX="-53.0859375" positionY="-158.34375" width="128" height="118"/>
+        <element name="Workout" positionX="-53.0859375" positionY="-158.34375" width="128" height="133"/>
     </elements>
 </model>

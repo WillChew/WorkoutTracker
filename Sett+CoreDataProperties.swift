@@ -2,7 +2,7 @@
 //  Sett+CoreDataProperties.swift
 //  WorkoutTracker
 //
-//  Created by Will Chew on 2020-01-22.
+//  Created by Will Chew on 2020-01-31.
 //  Copyright © 2020 Will Chew. All rights reserved.
 //
 //

@@ -2,7 +2,7 @@
 //  Exercise+CoreDataProperties.swift
 //  WorkoutTracker
 //
-//  Created by Will Chew on 2020-01-22.
+//  Created by Will Chew on 2020-01-31.
 //  Copyright © 2020 Will Chew. All rights reserved.
 //
 //
@@ -20,6 +20,7 @@ extension Exercise {
     @NSManaged public var name: String?
     @NSManaged public var notes: String?
     @NSManaged public var uuid: UUID?
+    @NSManaged public var type: String?
     @NSManaged public var set: NSOrderedSet?
     @NSManaged public var workout: Workout?
 
