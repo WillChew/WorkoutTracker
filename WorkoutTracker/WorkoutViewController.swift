@@ -17,9 +17,9 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     var managedContext : NSManagedObjectContext!
     var exercisesArray = [Exercise]()
-    var pickerView = UIPickerView()
-    
-    
+    var picker = UIPickerView()
+    var methodArray = ["Normal", "RPE", "Percentage"]
+    var activeTF = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +90,25 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
+extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return methodArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return methodArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        activeTF.text = methodArray[row]
+    }
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -143,6 +161,9 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath) as! TitlesTableViewCell
             cell.methodTF.delegate = self
             cell.methodTF.tag = indexPath.section
+            picker.delegate = self
+            
+            cell.methodTF.inputView = picker
             
             
             
@@ -176,6 +197,7 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
         //        adjustedIndexPathShortcut?.reps
         cell.repsTextField.delegate = self
         cell.weightTextField.delegate = self
+        cell.methodTextField.delegate = self
         
         cell.weightTextField.text = "\(adjustedIndexPathShortcut.weight)"
         
@@ -199,30 +221,34 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
         let table: UITableView = cell.superview as! UITableView
         let textFieldIndexPath = table.indexPath(for: cell)
         
-        if textField.tag == 1111 || textField.tag == 2222 {
-        guard let indexPathArray = textFieldIndexPath else { return }
-        let selectedSet = (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as! Sett)
-        
-        if textField.text == nil {
-            textField.text = "0"
-        }
-        
-        if textField.tag == 1111 {
+        if textField.tag >= 1111 {
+            guard let indexPathArray = textFieldIndexPath else { return }
+            let selectedSet = (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as! Sett)
             
-            let numberAsDouble = textField.text.map { Double($0) }
+            if textField.text == nil {
+                textField.text = "0"
+            }
             
-            guard let n = numberAsDouble, let weight = n else { return }
-            selectedSet.weight = weight
-            changeWeights(for: selectedSet, value: weight)
+            if textField.tag == 1111 {
+                
+                let numberAsDouble = textField.text.map { Double($0) }
+                
+                guard let n = numberAsDouble, let weight = n else { return }
+                selectedSet.weight = weight
+                changeWeights(for: selectedSet, value: weight)
+                
+            }
+            if textField.tag == 2222 {
+                guard let strAsInt = Int(textField.text!) else { return }
+                let reps = Int32(strAsInt)
+                
+                selectedSet.reps = reps
+                changeReps(for: selectedSet, value: reps)
+            }
             
-        }
-        if textField.tag == 2222 {
-            guard let strAsInt = Int(textField.text!) else { return }
-            let reps = Int32(strAsInt)
-            
-            selectedSet.reps = reps
-            changeReps(for: selectedSet, value: reps)
-        }
+            if textField.tag == 3333 {
+                print("YES")
+            }
         }
         
     }
@@ -233,7 +259,9 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
+        if textField.tag < 1000 {
+            activeTF = textField
+        }
     }
     
     
