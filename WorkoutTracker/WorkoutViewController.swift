@@ -17,6 +17,9 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     var managedContext : NSManagedObjectContext!
     var exercisesArray = [Exercise]()
+    var pickerView = UIPickerView()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +140,19 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
         
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TitlesCell", for: indexPath) as! TitlesTableViewCell
+            cell.methodTF.delegate = self
+            cell.methodTF.tag = indexPath.section
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             return cell
         }
@@ -179,11 +194,12 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let cell: UITableViewCell = textField.superview?.superview as! SetsTableViewCell
+        
+        let cell: UITableViewCell = textField.superview?.superview as! UITableViewCell
         let table: UITableView = cell.superview as! UITableView
         let textFieldIndexPath = table.indexPath(for: cell)
         
-        
+        if textField.tag == 1111 || textField.tag == 2222 {
         guard let indexPathArray = textFieldIndexPath else { return }
         let selectedSet = (exercisesArray[indexPathArray[0]].set![indexPathArray[1] - 1] as! Sett)
         
@@ -191,10 +207,7 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
             textField.text = "0"
         }
         
-        if textField.tag == 1 {
-            
-            
-            
+        if textField.tag == 1111 {
             
             let numberAsDouble = textField.text.map { Double($0) }
             
@@ -203,16 +216,14 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
             changeWeights(for: selectedSet, value: weight)
             
         }
-        if textField.tag == 2{
-        guard let strAsInt = Int(textField.text!) else { return }
-        let reps = Int32(strAsInt)
-        
-        
-        
-        selectedSet.reps = reps
-        changeReps(for: selectedSet, value: reps)
+        if textField.tag == 2222 {
+            guard let strAsInt = Int(textField.text!) else { return }
+            let reps = Int32(strAsInt)
+            
+            selectedSet.reps = reps
+            changeReps(for: selectedSet, value: reps)
         }
-        
+        }
         
     }
     
@@ -220,6 +231,12 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print(textField.tag)
+    }
+    
+    
 }
 
 extension WorkoutViewController {

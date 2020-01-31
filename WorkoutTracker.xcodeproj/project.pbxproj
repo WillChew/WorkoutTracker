@@ -22,6 +22,7 @@
 		21392CD823D8545A00DEDED2 /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */; };
 		21392CD923D8545A00DEDED2 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */; };
 		21392CDB23D8748E00DEDED2 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21392CDA23D8748E00DEDED2 /* ButtonTableViewCell.swift */; };
+		2179D10223E3950E00FF5977 /* TitlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2179D10123E3950E00FF5977 /* TitlesTableViewCell.swift */; };
 		218656DE23D9013100C6D819 /* SetsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218656DD23D9013100C6D819 /* SetsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		21392CD223D8545A00DEDED2 /* Exercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataClass.swift"; sourceTree = "<group>"; };
 		21392CD323D8545A00DEDED2 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		21392CDA23D8748E00DEDED2 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		2179D10123E3950E00FF5977 /* TitlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlesTableViewCell.swift; sourceTree = "<group>"; };
 		218656DD23D9013100C6D819 /* SetsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 			children = (
 				21392CBE23D8383800DEDED2 /* MainScreenListViewController.swift */,
 				21392CC023D8405500DEDED2 /* WorkoutViewController.swift */,
+				2179D10123E3950E00FF5977 /* TitlesTableViewCell.swift */,
 				218656DD23D9013100C6D819 /* SetsTableViewCell.swift */,
 				21392CDA23D8748E00DEDED2 /* ButtonTableViewCell.swift */,
 				21392C8F23D8347500DEDED2 /* AppDelegate.swift */,
@@ -168,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2179D10223E3950E00FF5977 /* TitlesTableViewCell.swift in Sources */,
 				218656DE23D9013100C6D819 /* SetsTableViewCell.swift in Sources */,
 				21392CC123D8405500DEDED2 /* WorkoutViewController.swift in Sources */,
 				21392CD723D8545A00DEDED2 /* Sett+CoreDataProperties.swift in Sources */,
