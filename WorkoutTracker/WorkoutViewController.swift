@@ -18,7 +18,7 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     var managedContext : NSManagedObjectContext!
     var exercisesArray = [Exercise]()
     var picker = UIPickerView()
-    var methodArray = ["Normal", "RPE", "Percentage"]
+    var methodArray = ["Normal", "RPE", "% of 1RM"]
     var activeTF = UITextField()
     var exerciseUUID = ""
     
@@ -253,7 +253,10 @@ extension WorkoutViewController : UITableViewDelegate, UITableViewDataSource, UI
             }
             
             if textField.tag == 3333 {
-                print(exercisesArray[indexPathArray[0]].type)
+                if exercisesArray[indexPathArray[0]].type == methodArray[2] {
+                    let percentage = textField.text.map { Double($0)}
+                    print(selectedSet.weight)
+                }
                 
             }
         }
